@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Actividades</title>
+    <script src="java/Vue.js"></script>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+
+<body>
+    <div id="app" class="contenedor">
+        <h1>Generador de Actividades</h1>
+
+        <!-- Formulario para agregar actividad -->
+        <div class="contenedor-input">
+            <input v-model="nuevaActividad" type="text" placeholder="Escribe una actividad" />
+            <button @click="agregarActividad">Agregar Actividad</button>
+        </div>
+
+        <!-- Barra de progreso con porcentaje -->
+        <div class="contenedor-barra">
+            <div class="barra-progreso" :style="{ width: progreso + '%' }"></div>
+            <span class="porcentaje">{{ progreso.toFixed(1) }}%</span>
+        </div>
+
+        <!-- Lista de actividades -->
+        <ul>
+            <li v-for="(actividad, index) in actividades" :key="actividad.id" class="item-actividad">
+                <input type="checkbox" v-model="actividad.completada" @change="actualizarProgreso" />
+                <span :class="{ completada: actividad.completada }">{{ actividad.nombre }}</span>
+                <button @click="eliminarActividad(index)" class="boton-eliminar">Eliminar</button>
+            </li>
+        </ul>
+
+        <!-- Información de progreso -->
+        <div class="info-progreso">
+            <p>Actividades completadas: {{ actividadesCompletadas }} / {{ actividades.length }}</p>
+        </div>
+    </div>
+
+    <script src="java/java.js"></script>
+</body>
+
+</html>
